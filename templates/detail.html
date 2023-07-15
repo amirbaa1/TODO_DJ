@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ det_task.title }}</h1>
+    <p>{{ det_task.text }}</p>
+    <p>{{ det_task.data_time }}</p>
+    {{ det_task.complete }}
+{% endblock %}

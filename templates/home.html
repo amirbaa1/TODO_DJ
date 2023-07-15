@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+        {% for list_t in list_task %}
+
+            {{ list_t.title }}
+            <a href="{% url 'detail' list_t.title %}">view</a>
+            <a href="{% url "update" list_t.title %}">edit</a>
+            <a href="{% url "Delete" list_t.title %}">Delete</a>
+
+            <br>
+        {% endfor %}
+    {% endif %}
+
+
+{% endblock content %}
