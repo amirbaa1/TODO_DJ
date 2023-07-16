@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="d-flex justify-content-center">
+    <div class="shadow p-4 mb-5 bg-body-tertiary rounded" style="width: 300px; height: 200px;" >
+
     <h1>{{ det_task.title }}</h1>
     <p>{{ det_task.text }}</p>
     <p>{{ det_task.data_time }}</p>
     {{ det_task.complete }}
+     </div>
+</div>
 {% endblock %}

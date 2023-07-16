@@ -1,17 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-
-    {% if user.is_authenticated %}
-        {% for list_t in list_task %}
-
-            {{ list_t.title }}
-            <a href="{% url 'detail' list_t.title %}">view</a>
-            <a href="{% url "update" list_t.title %}">edit</a>
-            <a href="{% url "Delete" list_t.title %}">Delete</a>
-
-            <br>
-        {% endfor %}
-    {% endif %}
-
-
+    <div class="d-flex justify-content-center">
+        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 50%; height: 50%;">
+            <div style="text-align: right;">
+                {% if user.is_authenticated %}
+                    Hi {{ user.username }} !
+                    <a href="{% url 'logout' %}">logout</a>
+                    <br>
+                    <a href="{% url "create" %}">+ add Task</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">signup</a>
+                {% endif %}
+            </div>
+        <div style="text-align: left">
+            <h4>You have {{ count }} task</h4>
+        </div>
+            {% if user.is_authenticated %}
+                {% for list_t in list_task %}
+                    {% if list_t.complete %}
+                        <div class="task-wrapper">
+                            <div class="task-title">
+                                <div class="task-complete"></div>
+                                <i><s>{{ list_t.title }}</s></i>
+                            </div>
+                            <a href="{% url 'detail' list_t.title %}">view</a>
+                            <a href="{% url "update" list_t.title %}">edit</a>
+                            <a href="{% url "Delete" list_t.title %}">Delete</a>
+                        </div>
+                        <br>
+                    {% else %}
+                        <div class="task-wrapper">
+                            <div class="task-title">
+                                <div class="task-no-complete"></div>
+                                <i>{{ list_t.title }}</i>
+                            </div>
+                            <a href="{% url 'detail' list_t.title %}">view</a>
+                            <a href="{% url "update" list_t.title %}">edit</a>
+                            <a href="{% url "Delete" list_t.title %}">Delete</a>
+                        </div>
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 {% endblock content %}

@@ -24,7 +24,7 @@ class ListTask(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListTask, self).get_context_data(**kwargs)
         context['list_task'] = context['list_task'].filter(user=self.request.user)
-        # context['list_task'] = context['list_task'].filter(complete=False).count()
+        context['count'] = context['list_task'].filter(complete=False).count()
         return context
 
 
@@ -47,7 +47,7 @@ class EditTask(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = "update.html"
     fields = ['title', 'text', 'complete']
-    success_url = "home"
+    success_url = reverse_lazy('home')
     slug_field = 'title'
     slug_url_kwarg = 'title'
 
