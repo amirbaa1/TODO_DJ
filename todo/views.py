@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView
 from .models import Task
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -52,10 +53,8 @@ class EditTask(LoginRequiredMixin, UpdateView):
     slug_url_kwarg = 'title'
 
 
-class DeleteTask(DeleteView):
-    model = Task
-    template_name = "delete.html"
-    success_url = reverse_lazy('home')
-    context_object_name = "delete_task"
-    slug_field = 'title'
-    slug_url_kwarg = 'title'
+class DeleteTask(View):
+    def post(self, request, todo_id):
+        todo = get_object_or_404(Task, str=todo_id)
+        todo.delete()
+        return render(request, 'home.html', context={'Delete': True})

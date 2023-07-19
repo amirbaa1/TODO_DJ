@@ -2,20 +2,30 @@
 {% block content %}
     <div class="d-flex justify-content-center">
         <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 50%; height: 50%;">
-            <div style="text-align: right;">
-                {% if user.is_authenticated %}
-                    Hi {{ user.username }} !
-                    <a href="{% url 'logout' %}">logout</a>
-                    <br>
-                    <a href="{% url "create" %}">+ add Task</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Login</a>
-                    <a href="{% url 'signup' %}">signup</a>
-                {% endif %}
+            <div class="header-bar">
+                <div style="text-align: right;">
+
+                    {% if user.is_authenticated %}
+                        <div style="float: left"> Hi {{ user.username }} !</div>
+
+                        <a href="{% url 'logout' %}">logout</a>
+                        <br>
+
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                        <a href="{% url 'signup' %}">signup</a>
+                    {% endif %}
+
+                </div>
+                <div>
+                    <h4 style="text-align: left">You have {{ count }} task</h4>
+                </div>
+
+
             </div>
-        <div style="text-align: left">
-            <h4>You have {{ count }} task</h4>
-        </div>
+                            <a style="float: right" href="{% url "create" %}">+ add Task</a>
+
+        <br>
             {% if user.is_authenticated %}
                 {% for list_t in list_task %}
                     {% if list_t.complete %}

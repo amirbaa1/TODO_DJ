@@ -5,10 +5,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title></title>
     <style>
         body {
             background-color: #FAFAFAFA;
+            font-family: 'Roboto', sans-serif;
         }
 
         .task-wrapper {
@@ -44,20 +48,32 @@
             background-color: #c0bcbc;
             border-radius: 30px;
         }
+
+        .header-bar {
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            color: #FFF;
+            background: linear-gradient(90deg, #00416A 10%, #E4E5E6 150%);
+        }
+
+        .header-bar a {
+            text-decoration: none;
+            color: #FFF;
+        }
     </style>
 </head>
 
-{% if user.is_authenticated %}
-
-    Hi {{ user.username }} !
-    <a href="{% url 'logout' %}">logout</a>
-    <br>
-    <a href="{% url "create" %}">+ add Task</a>
-{% else %}
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'signup' %}">signup</a>
-{% endif %}
-<hr>
+{#{% if user.is_authenticated %}#}
+{##}
+{#    Hi {{ user.username }} !#}
+{#    <a href="{% url 'logout' %}">logout</a>#}
+{#    <br>#}
+{#    <a href="{% url "create" %}">+ add Task</a>#}
+{#{% else %}#}
+{#    <a href="{% url 'login' %}">Login</a>#}
+{#    <a href="{% url 'signup' %}">signup</a>#}
+{#{% endif %}#}
+{#<hr>#}
 <div class="container">
     {% block content %}
     {% endblock content %}

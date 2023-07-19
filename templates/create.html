@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>+ Task</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update">
-    </form>
+    <div class="d-flex justify-content-center">
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="text-align: center;width: 700px">
+            <div class="header-bar">
+                <h1>+ Task</h1>
+            </div>
+            <br>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
