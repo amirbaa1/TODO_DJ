@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br>
     <div class="d-flex justify-content-center">
-        <div class="shadow bg-body-tertiary rounded" style="text-align: center;width: 700px">
+        <div class="shadow bg-body-tertiary rounded" style="width: 700px">
             <div class="header-bar">
                 <h2>Sign up</h2>
             </div>
             <br>
+            <div style="padding: 10px">
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Sign Up</button>
+               <button type="submit" class="btn btn-outline-primary">Sign Up</button>
             </form>
-        <a href="{% url 'login' %}">Login</a>
+       <a class="link-opacity-25-hover" href="{% url 'login' %}">Login</a>
+        </div>
         </div>
     </div>
 {% endblock content %}

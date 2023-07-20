@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView
+
+from .forms import FormCreate
 from .models import Task
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -9,7 +11,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class CreateTask(LoginRequiredMixin, CreateView):
     model = Task
     template_name = "create.html"
-    fields = ["title", 'text', 'complete']
+    # fields = ["title", 'text', 'complete']
+    form_class = FormCreate
     success_url = reverse_lazy("home")
 
     def form_valid(self, form):
@@ -53,8 +56,10 @@ class EditTask(LoginRequiredMixin, UpdateView):
     slug_url_kwarg = 'title'
 
 
-class DeleteTask(View):
-    def post(self, request, todo_id):
-        todo = get_object_or_404(Task, str=todo_id)
-        todo.delete()
-        return render(request, 'home.html', context={'Delete': True})
+class DeleteTask(DeleteView):
+    model = Task
+    success_url = reverse_lazy('home')
+    template_name = 'delete.html'
+    slug_field = 'title'
+    slug_url_kwarg = 'title'
+
