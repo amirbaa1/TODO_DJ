@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="d-flex justify-content-center">
-        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="text-align: center;width: 700px">
+        <div class="shadow bg-body-tertiary rounded" style="text-align: center;width: 700px">
             <div class="header-bar">
-                <h2>Sginup</h2>
+                <h2>Sign up</h2>
             </div>
-<br>
+            <br>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Log In</button>
+                <button type="submit">Sign Up</button>
             </form>
+        <a href="{% url 'login' %}">Login</a>
         </div>
     </div>
 {% endblock content %}

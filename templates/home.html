@@ -1,58 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br>
     <div class="d-flex justify-content-center">
-        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="width: 50%; height: 50%;">
+        <div class="shadow-lg bg-body-tertiary rounded" style="width: fit-content; height: fit-content;">
             <div class="header-bar">
                 <div style="text-align: right;">
-
                     {% if user.is_authenticated %}
                         <div style="float: left"> Hi {{ user.username }} !</div>
-
                         <a href="{% url 'logout' %}">logout</a>
-                        <br>
-
                     {% else %}
                         <a href="{% url 'login' %}">Login</a>
                         <a href="{% url 'signup' %}">signup</a>
                     {% endif %}
-
                 </div>
                 <div>
                     <h4 style="text-align: left">You have {{ count }} task</h4>
                 </div>
-
-
             </div>
-                            <a style="float: right" href="{% url "create" %}">+ add Task</a>
+            <div style="padding: 20px">
+                <a style="float: right" href="{% url "create" %}">+ add Task</a>
+                <br>
+                {% if user.is_authenticated %}
+                    {% for list_t in list_task %}
+                        {% if list_t.complete %}
+                            <div class="card touchable" style="width: 400px; height: 50px;cursor: pointer;"
+                                 onclick="window.location.href='{% url 'detail' list_t.title %}'">
+                                <div class="card-body">
+                                    <i>{{ list_t.title }}</i>
+                                    <a href="{% url "Delete" list_t.title %}" style="float: right;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                {#                                <a href="{% url "update" list_t.title %}">edit</a>#}
+                            </div>
+                            <br>
+                        {% else %}
 
-        <br>
-            {% if user.is_authenticated %}
-                {% for list_t in list_task %}
-                    {% if list_t.complete %}
-                        <div class="task-wrapper">
-                            <div class="task-title">
-                                <div class="task-complete"></div>
-                                <i><s>{{ list_t.title }}</s></i>
+                            <div class="card touchable" style="width: 400px; height: 50px;cursor: pointer;"
+                                 onclick="window.location.href='{% url 'detail' list_t.title %}'">
+                                <div class="card-body" style="text-decoration: none; color: #212529;">
+                                    <i>{{ list_t.title }}</i>
+                                    <a href="{% url "Delete" list_t.title %}" style="float: right;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                {#                                <a href="{% url "update" list_t.title %}">edit</a>#}
                             </div>
-                            <a href="{% url 'detail' list_t.title %}">view</a>
-                            <a href="{% url "update" list_t.title %}">edit</a>
-                            <a href="{% url "Delete" list_t.title %}">Delete</a>
-                        </div>
-                        <br>
-                    {% else %}
-                        <div class="task-wrapper">
-                            <div class="task-title">
-                                <div class="task-no-complete"></div>
-                                <i>{{ list_t.title }}</i>
-                            </div>
-                            <a href="{% url 'detail' list_t.title %}">view</a>
-                            <a href="{% url "update" list_t.title %}">edit</a>
-                            <a href="{% url "Delete" list_t.title %}">Delete</a>
-                        </div>
-                        <br>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
+
     </div>
 {% endblock content %}

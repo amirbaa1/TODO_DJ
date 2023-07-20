@@ -5,9 +5,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title></title>
     <style>
         body {
@@ -16,23 +16,26 @@
         }
 
         .task-wrapper {
-            display: flex;
+            display: flex; /* ایجاد یک flex container برای قرار دادن المان‌ها در یک ردیف */
+
             align-items: center;
-            justify-content: space-between;
-            padding: 20px;
+
+            padding: 10px;
             background-color: #fff;
             border-top: 1px solid rgb(244, 241, 241);
 
         }
 
-        .task-title {
-            display: flex;
+        .task-wrapper:hover {
+            background-color: #dce1ea;
         }
+
 
         .task-title a {
             text-decoration: none;
             color: #4b5156;
-            margin-left: 10px;
+            margin-left: auto;
+
         }
 
         .task-complete {
@@ -59,6 +62,16 @@
         .header-bar a {
             text-decoration: none;
             color: #FFF;
+        }
+
+        .header-bar a:hover {
+            text-decoration: none;
+            color: #5d646f;
+        }
+
+        .card.touchable:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
